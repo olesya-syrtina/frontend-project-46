@@ -1,9 +1,9 @@
+import _ from 'lodash';
 import parse from './parser.js';
-import _ from 'lodash'; 
 
 const genDiff = (filepath1, filepath2) => {
-  const data1 = parse(filepath1); 
-  const data2 = parse(filepath2); 
+  const data1 = parse(filepath1);
+  const data2 = parse(filepath2);
 
   const keys = _.sortBy(_.union(Object.keys(data1), Object.keys(data2)));
 
