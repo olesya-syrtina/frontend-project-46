@@ -4,7 +4,7 @@ import yaml from 'js-yaml';
 
 const parse = (filepath) => {
   const absolutePath = path.resolve(process.cwd(), filepath);
-  const content = fs.readFileSync(absolutePath, 'utf-8').toLowerCase();
+  const content = fs.readFileSync(absolutePath, 'utf-8');
   const extension = path.extname(absolutePath);
 
   switch (extension) {

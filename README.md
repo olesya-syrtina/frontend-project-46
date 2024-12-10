@@ -27,3 +27,6 @@ make install
 
 
 <a href="https://asciinema.org/a/9KqJ2iZoMDcpPVSKcWfgKOUXv" target="_blank"><img src="https://asciinema.org/a/9KqJ2iZoMDcpPVSKcWfgKOUXv.svg" /></a>
+
+
+<a href="https://asciinema.org/a/edcpEDo3pHRWcMwVGNzYP1O21" target="_blank"><img src="https://asciinema.org/a/edcpEDo3pHRWcMwVGNzYP1O21.svg" /></a>
