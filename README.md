@@ -33,3 +33,6 @@ make install
 
 
 <a href="https://asciinema.org/a/MhoNAIOeYXDBXlo7kFhINSm8s" target="_blank"><img src="https://asciinema.org/a/MhoNAIOeYXDBXlo7kFhINSm8s.svg" /></a>
+
+
+<a href="https://asciinema.org/a/8RhwiD3Aq0PlAWfzD476IYemO" target="_blank"><img src="https://asciinema.org/a/8RhwiD3Aq0PlAWfzD476IYemO.svg" /></a>
