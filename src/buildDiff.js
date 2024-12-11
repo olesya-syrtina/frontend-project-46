@@ -1,7 +1,7 @@
 const buildDiff = (obj1, obj2) => {
   const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort();
 
-  return keys.flatMap((key) => {
+  return keys.map((key) => {
     if (!(key in obj2)) {
       return { key, type: 'removed', value: obj1[key] };
     }
