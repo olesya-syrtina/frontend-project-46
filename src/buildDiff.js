@@ -1,5 +1,7 @@
+import _ from 'lodash';
+
 const buildDiff = (obj1, obj2) => {
-  const keys = [...new Set([...Object.keys(obj1), ...Object.keys(obj2)])].sort();
+  const keys = _([...Object.keys(obj1), ...Object.keys(obj2)]).uniq().sortBy().value();
 
   return keys.map((key) => {
     if (!(key in obj2)) {
