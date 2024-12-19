@@ -8,7 +8,7 @@ const formatValue = (value) => {
   return value;
 };
 
-const formatPlain = (diff, parentPath = '') => diff
+const formatPlainInternal = (diff, parentPath = '') => diff
   .flatMap((node) => {
     const propertyPath = parentPath ? `${parentPath}.${node.key}` : node.key;
 
@@ -18,15 +18,16 @@ const formatPlain = (diff, parentPath = '') => diff
       case 'removed':
         return `Property '${propertyPath}' was removed`;
       case 'changed':
-        return `Property '${propertyPath}' was updated. From ${formatValue(node.oldValue)} to ${formatValue(node.newValue)}`;
+        return `Property '${propertyPath}' was updated. From ${formatValue(node.value1)} to ${formatValue(node.value2)}`;
       case 'nested':
-        return formatPlain(node.children, propertyPath);
+        return formatPlainInternal(node.children, propertyPath);
       case 'equal':
         return [];
       default:
         throw new Error(`Unknown type: ${node.type}`);
     }
-  })
-  .join('\n');
+  });
+
+const formatPlain = (diff) => formatPlainInternal(diff).join('\n');
 
 export default formatPlain;

@@ -12,10 +12,10 @@ const stringify = (value, depth) => {
   return `{\n${lines.join('\n')}\n${indent(depth)}  }`;
 };
 
-const iter = (tree, depth = 1) => {
+const formatStylishInternal = (tree, depth = 1) => {
   const lines = tree.map((node) => {
     const {
-      key, type, value, oldValue, newValue, children,
+      key, type, value, value1, value2, children,
     } = node;
 
     switch (type) {
@@ -27,11 +27,11 @@ const iter = (tree, depth = 1) => {
         return `${indent(depth)}  ${key}: ${stringify(value, depth)}`;
       case 'changed':
         return [
-          `${indent(depth)}- ${key}: ${stringify(oldValue, depth)}`,
-          `${indent(depth)}+ ${key}: ${stringify(newValue, depth)}`,
+          `${indent(depth)}- ${key}: ${stringify(value1, depth)}`,
+          `${indent(depth)}+ ${key}: ${stringify(value2, depth)}`,
         ].join('\n');
       case 'nested':
-        return `${indent(depth)}  ${key}: {\n${iter(children, depth + 1)}\n${indent(depth)}  }`;
+        return `${indent(depth)}  ${key}: {\n${formatStylishInternal(children, depth + 1)}\n${indent(depth)}  }`;
       default:
         throw new Error(`Unknown type: ${type}`);
     }
@@ -40,9 +40,9 @@ const iter = (tree, depth = 1) => {
   return lines.join('\n');
 };
 
-const stylish = (tree, depth = 1) => {
-  const iterResult = iter(tree, depth);
+const formatStylish = (tree, depth = 1) => {
+  const iterResult = formatStylishInternal(tree, depth);
   return `{\n${iterResult}\n}`;
 };
 
-export default stylish;
+export default formatStylish;

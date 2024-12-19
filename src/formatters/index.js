@@ -1,6 +1,7 @@
 import formatStylish from './stylish.js';
 import formatPlain from './plain.js';
-import formatJson from './json.js';
+
+const formatJson = (diff) => JSON.stringify(diff, null, 2);
 
 const formatters = {
   stylish: formatStylish,

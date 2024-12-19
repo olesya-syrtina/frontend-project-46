@@ -9,32 +9,23 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => fs.readFileSync(getFixturePath(filename), 'utf-8');
 
-test('genDiff compares nested JSON files correctly', () => {
-  const file1Path = getFixturePath('file1.json');
-  const file2Path = getFixturePath('file2.json');
-  const expected = readFile('expectedStylish.txt').trim();
-  expect(genDiff(file1Path, file2Path)).toBe(expected);
+const formats = ['json', 'yml'];
+const expectedStylish = readFile('expectedStylish.txt').trim();
+const expectedPlain = readFile('expectedPlain.txt').trim();
+const expectedJson = readFile('expectedJson.txt').trim();
+
+test.each(formats)('genDiff compares nested %s files correctly in stylish format', (format) => {
+  const file1Path = getFixturePath(`file1.${format}`);
+  const file2Path = getFixturePath(`file2.${format}`);
+  expect(genDiff(file1Path, file2Path)).toBe(expectedStylish);
 });
 
-test('genDiff compares nested YAML files correctly', () => {
-  const file1Path = getFixturePath('file1.yml');
-  const file2Path = getFixturePath('file2.yml');
-  const expected = readFile('expectedStylish.txt').trim();
-  expect(genDiff(file1Path, file2Path)).toBe(expected);
-});
-
-test('genDiff with plain format', () => {
+test.each([
+  ['plain', expectedPlain],
+  ['json', expectedJson],
+])('genDiff compares files with %s format', (format, expected) => {
   const file1Path = getFixturePath('file1.json');
   const file2Path = getFixturePath('file2.json');
-  const result = genDiff(file1Path, file2Path, 'plain');
-  const expected = readFile('expectedPlain.txt').trim();
-  expect(result).toEqual(expected.trim());
-});
-
-test('gendiff with json format', () => {
-  const file1Path = getFixturePath('file1.json');
-  const file2Path = getFixturePath('file2.json');
-  const diff = genDiff(file1Path, file2Path, 'json');
-  const expected = readFile('expectedJson.txt').trim();
-  expect(diff).toBe(expected);
+  const result = genDiff(file1Path, file2Path, format);
+  expect(result).toBe(expected);
 });

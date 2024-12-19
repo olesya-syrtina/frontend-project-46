@@ -21,7 +21,7 @@ const buildDiff = (obj1, obj2) => {
 
     if (value1 !== value2) {
       return {
-        key, type: 'changed', oldValue: value1, newValue: value2,
+        key, type: 'changed', value1, value2,
       };
     }
 

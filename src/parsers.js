@@ -5,13 +5,13 @@ import yaml from 'js-yaml';
 const parse = (filepath) => {
   const absolutePath = path.resolve(process.cwd(), filepath);
   const content = fs.readFileSync(absolutePath, 'utf-8');
-  const extension = path.extname(absolutePath);
+  const extension = path.extname(absolutePath).slice(1);
 
   switch (extension) {
-    case '.json':
+    case 'json':
       return JSON.parse(content);
-    case '.yml':
-    case '.yaml':
+    case 'yml':
+    case 'yaml':
       return yaml.load(content);
     default:
       throw new Error(`Unsupported file extension: ${extension}`);
